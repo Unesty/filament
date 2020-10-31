@@ -21,6 +21,10 @@ option(FILAMENT_ENABLE_LTO "Enable link-time optimizations if supported by the c
 
 option(FILAMENT_SKIP_SAMPLES "Don't build samples" OFF)
 
+option(FILAMENT_SUPPORTS_WAYLAND "Include Wayland support in Linux builds" ON)
+
+option(FILAMENT_SUPPORTS_KMS "Include KMS support in Linux builds" ON)
+
 option(FILAMENT_SUPPORTS_XCB "Include XCB support in Linux builds" ON)
 
 option(FILAMENT_SUPPORTS_XLIB "Include XLIB support in Linux builds" ON)
@@ -88,6 +92,14 @@ if (UNIX AND NOT APPLE AND NOT ANDROID AND NOT WEBGL)
 endif()
 
 if (LINUX)
+
+    if (FILAMENT_SUPPORTS_WAYLAND)
+        add_definitions(-DFILAMENT_SUPPORTS_WAYLAND)
+    endif()
+    
+    if (FILAMENT_SUPPORTS_KMS)
+        add_definitions(-DFILAMENT_SUPPORTS_KMS)
+    endif()
 
     if (FILAMENT_SUPPORTS_XCB)
         add_definitions(-DFILAMENT_SUPPORTS_XCB)
