@@ -22,6 +22,11 @@
 #include <backend/DriverEnums.h>
 #include "VulkanPlatform.h"
 
+
+#ifdef FILAMENT_SUPPORTS_WAYLAND
+#include <wayland-client-protocol.h>
+#endif
+
 #ifdef FILAMENT_SUPPORTS_XCB
 #include <xcb/xcb.h>
 #endif
@@ -47,6 +52,9 @@ private:
 #endif
 #ifdef FILAMENT_SUPPORTS_XLIB
     Display* mDisplay;
+#endif
+#ifdef FILAMENT_SUPPORTS_WAYLAND
+    struct wl_display* wl_display;
 #endif
 };
 
